@@ -141,7 +141,11 @@ int generateScanUnit(char *directory, const char *targetName, const char *unitNa
 	// Make symlink
 	strcat(targetpath, "/");
 	strcat(targetpath, unitName);
-	symlink(unitName, targetpath);
+	char *relativeUnit = malloc((strlen("../") + strlen(unitName) + 1) * sizeof(char));
+	strcpy(relativeUnit, "../");
+	strcat(relativeUnit, unitName);
+	symlink(relativeUnit, targetpath);
+	free(relativeUnit);
 	// Check if unit already exists
 	if (access(unitpath, R_OK) != -1) {
 		perror("Scanning unit file already exists or cannot be accessed\n");
@@ -212,7 +216,11 @@ int generateCacheUnit(char *directory, const char *targetName, const char *unitN
 	// Make symlink
 	strcat(targetpath, "/");
 	strcat(targetpath, unitName);
-	symlink(unitName, targetpath);
+	char *relativeUnit = malloc((strlen("../") + strlen(unitName) + 1) * sizeof(char));
+	strcpy(relativeUnit, "../");
+	strcat(relativeUnit, unitName);
+	symlink(relativeUnit, targetpath);
+	free(relativeUnit);
 	// Check if unit already exists
 	if (access(unitpath, R_OK) != -1) {
 		free(unitpath);
@@ -319,6 +327,8 @@ int generateSysrootUnit(char *directory, int bootfs, char *dataset, char *snapsh
 [Unit]\n\
 Requires=systemd-ask-password-console.service\n\
 After=systemd-ask-password-console.service\n\
+#Wants=zfs-import-cache.service zfs-import-scan.service\n\
+#After=zfs-import-cache.service zfs-import-scan.service\n\
 \n\
 [Mount]\n\
 What=%s\n\
