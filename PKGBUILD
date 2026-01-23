@@ -32,5 +32,5 @@ package() {
 	done
 
 	# systemd unit
-	install -Dm644 units/mkinitcpio-override.conf "${pkgdir}/usr/lib/systemd/system/mkinitcpio-generate-shutdown-ramfs.service.d/sd-zfs.conf"
+	install -Dm644 units/50-sd-zfs.conf "$pkgdir/usr/lib/tmpfiles.d/50-sd-zfs.conf"
 }
