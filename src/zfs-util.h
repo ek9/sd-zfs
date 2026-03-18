@@ -13,6 +13,10 @@
 #define MOUNT_EXE "/usr/bin/mount"
 #endif /* MOUNT_EXE */
 
+#ifndef SYSTEMD_ASK_PASS_EXE
+#define SYSTEMD_ASK_PASS_EXE "/usr/bin/systemd-ask-password"
+#endif /* SYSTEMD_ASK_PASS_EXE */
+
 #ifndef ZFS_CMD
 #define ZFS_CMD "zfs"
 #endif /* ZFS_CMD */
@@ -24,6 +28,10 @@
 #ifndef MOUNT_CMD
 #define MOUNT_CMD "mount"
 #endif /* MOUNT_CMD */
+
+#ifndef SYSTEMD_ASK_PASS_CMD
+#define SYSTEMD_ASK_PASS_CMD "systemd-ask-password"
+#endif /* SYSTEMD_ASK_PASS_CMD */
 
 /*
  * Removes a dataset from a pool including
@@ -111,5 +119,17 @@ int zfs_clone_snap(char *snapshot, char *datasetTarget, char *mountpoint);
  * mountpoint must be NULL
  */
 int zfs_get_alt_mp(char *dataset, char **mountpoint);
+
+/*
+ * Checks if a dataset must be decrypted with password.
+ * Returns 1 when encryption is enabled and key must be typed in.
+ */
+int zfs_ds_requires_password(char *dataset);
+
+/*
+ * Asks for a password and decrypts the given dataset.
+ * Returns 1 when everything went fine.
+ */
+int zfs_decrypt_ds_with_password(char *dataset);
 
 #endif /* ZFS_UTIL_H */
