@@ -1,5 +1,5 @@
 pkgname=mkinitcpio-sd-zfs-encryption
-pkgver=1.1.0
+pkgver=1.1.1
 pkgrel=1
 pkgdesc='Compatibility between systemd and ZFS roots'
 license=('MIT')
@@ -7,7 +7,7 @@ url='https://github.com/ek9/sd-zfs'
 conflicts=('mkinitcpio-sd-zfs')
 depends=('mkinitcpio' 'systemd')
 source=("https://github.com/ek9/sd-zfs/archive/refs/tags/v${pkgver}.tar.gz")
-sha512sums=('9925efc9de020486af8de611837218eb491afee9689eeb0ee56b75d8e1185cd1fbdb294390265ea1fbc53bfee13ec0a011798827a1b2a9fe89b9d70fac75e0f0')
+sha512sums=('b87aafd601abb513cf295227af1c335a1ed677a35db100286ad49e4c1300ee6c449ee6771d5815055d6512952f8786fde400b2fc5ef35d978adbacf8f39d45ac')
 arch=('i686' 'x86_64')
 
 build() {

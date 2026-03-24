@@ -329,7 +329,8 @@ int generateSysrootUnit(char *directory, int bootfs, char *dataset, char *snapsh
 #After=zfs-import-cache.service zfs-import-scan.service\n\
 Requires=systemd-ask-password-console.service\n\
 Wants=zfs-import-cache.service zfs-import-scan.service\n\
-After=systemd-ask-password-console.service zfs-import-cache.service zfs-import-scan.service \n\
+#After=systemd-ask-password-console.service zfs-import-cache.service zfs-import-scan.service \n\
+After=systemd-ask-password-console.service zfs-import.target \n\
 \n\
 [Mount]\n\
 What=%s\n\
